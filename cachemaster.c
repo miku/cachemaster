@@ -248,9 +248,15 @@ bool doCmd(const char* path, enum CmdType cmd_type, enum FileType file_type, Cac
 
         switch(cmd_type){
             case CLEAR:
+#if defined(__APPLE__)
+                if (fcntl(fd, F_NOCACHE, 1) != 0) {
+                    goto ERROR;
+                }
+#else
                 if(posix_fadvise(fd, 0, st.st_size, POSIX_FADV_DONTNEED) != 0){
                     goto ERROR;
                 }
+#endif
                 fprintf(stdout, "Release:%s\n", real_path);
                 break;
             case STAT:
@@ -304,9 +310,22 @@ EMPTYFILE:
                 }
             case WARM:
                 gettimeofday(&begin, NULL);
+#if defined(__APPLE__)
+                struct radvisory {
+                        off_t ra_offset;
+                        int   ra_count;
+                };
+                struct radvisory advise;
+                advise.ra_offset = 0;
+                advise.ra_count = st.st_size;
+                if (fcntl(fd, F_RDADVISE, &advise) != 0) {
+                    goto ERROR;
+                }
+#else
                 if(posix_fadvise(fd, 0, st.st_size, POSIX_FADV_WILLNEED) != 0){
                     goto ERROR;
                 }
+#endif
                 gettimeofday(&end, NULL);
                 time_used = getUsedTime(&begin, &end);
                 fprintf(stdout, "Warmup File:%s TimeUsed:%d ms\n", real_path, time_used);
