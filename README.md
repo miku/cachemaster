@@ -1,6 +1,21 @@
 cachemaster
 ===========
 
+This repository was forked from [ccc06b79e46280c9c95777daa3999e3c7866b653](https://github.com/caisonglu/cachemaster/commit/ccc06b79e46280c9c95777daa3999e3c7866b653)
+and adds support for compilation on OS X and a Makefile.
+
+To build, run:
+
+```
+$ make
+```
+
+To clean:
+
+```
+$ make clean
+```
+
 Introduction
 ------------
 
