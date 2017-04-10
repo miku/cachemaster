@@ -1,7 +1,8 @@
 cachemaster
 ===========
 
-##Introduction
+Introduction
+------------
 
 Cachemaster is similar to VMTOUCH, but with more functions.
 Such as:
@@ -12,20 +13,22 @@ Stat page cache,
 Stat page cache in realtime mode,
 By file or directory~
 
-##Contributors
+Contributors
+------------
 
 henshao@taobao.com,tiechou@taobao.com
 
-##Examples
+Examples
+--------
 
-###Stat page cache of file
+Stat page cache of file
 
 ```shell
 -bash-3.2$ ./cachemaster -s -f data
 Stat:data size:488M cached:488M
 ```
 
-###Stat page cache of directory
+Stat page cache of directory
 
 ```shell
 -bash-3.2$ ./cachemaster -s -d mydir/
@@ -35,7 +38,7 @@ Stat:mydir//child/file3 size:488M cached:488M
 Total Cache of Directory:mydir/ size:1.4G cached:976M
 ```
 
-###Kick page cache of file
+Kick page cache of file
 
 ```shell
 -bash-3.2$ ./cachemaster -s -f data
@@ -46,7 +49,7 @@ Release:data
 Stat:data size:488M cached:0Bytes
 ```
 
-###Kick page cache of directory
+Kick page cache of directory
 
 ```shell
 -bash-3.2$ ./cachemaster -s -d mydir/
@@ -65,14 +68,14 @@ Stat:mydir//child/file3 size:488M cached:0Bytes
 Total Cache of Directory:mydir/ size:1.4G cached:0Bytes
 ```
 
-###Lock in mem of file
+Lock in mem of file
 
 ```shell
 -bash-3.2$ ./cachemaster -l -f data
 Lock data succeed, size:488M
 ```
 
-###Lock in mem of file in daemon
+Lock in mem of file in daemon
 
 ```shell
 -bash-3.2$ ./cachemaster -l -f data  -m
@@ -80,7 +83,7 @@ Lock data succeed, size:488M
 28279 ?        SLs    0:00 ./cachemaster -l -f data -m
 ```
 
-###Lock in mem of directory
+Lock in mem of directory
 
 ```shell
 -bash-3.2$ ./cachemaster -l -d mydir/
@@ -89,7 +92,7 @@ Lock mydir//file2 succeed, size:488M
 Lock mydir//child/file3 succeed, size:488M
 ```
 
-###Lock in mem of directory in daemon
+Lock in mem of directory in daemon
 
 ```shell
 -bash-3.2$ ./cachemaster -l -d mydir/ -m
@@ -97,7 +100,7 @@ Lock mydir//child/file3 succeed, size:488M
 28694 ?        SLs    0:00 ./cachemaster -l -d mydir/ -m
 ```
 
-###Real time stat of file(-i is interval, default 1s)
+Real time stat of file(-i is interval, default 1s)
 
 ```shell
 -bash-3.2$ ./cachemaster -r -f data
@@ -109,7 +112,7 @@ time    pageCount       inCache change
 [2103-8-5 16:03:17] 125000      125000  0
 ```
 
-###Real time stat of directory(-i is interval, default 1s)
+Real time stat of directory(-i is interval, default 1s)
 
 ```shell
 -bash-3.2$ ./cachemaster -r -d mydir/ -i 0.5
@@ -122,7 +125,7 @@ time    pageCount       inCache change
 [2103-8-5 16:05:15] 375000      375000  0
 ```
 
-###Real time stat of directory(-s suppress the unchanged line)
+Real time stat of directory(-s suppress the unchanged line)
 
 ```shell
 -bash-3.2$ ./cachemaster -r -d mydir/ -i 0.5 -S
@@ -133,7 +136,7 @@ time    pageCount       inCache change
 [2103-8-5 16:11:17] 375000      0       -358841
 ```
 
-###Warmup/Readahead of file
+Warmup/Readahead of file
 
 ```shell
 -bash-3.2$ ./cachemaster -c -f data
@@ -146,7 +149,7 @@ Warmup File:data TimeUsed:6027 ms
 Stat:data size:488M cached:488M
 ```
 
-###Warmup/Readahead of directory
+Warmup/Readahead of directory
 
 ```shell
 -bash-3.2$ ./cachemaster -s -d mydir/
@@ -167,7 +170,8 @@ Stat:mydir//child/file3 size:488M cached:488M
 Total Cache of Directory:mydir/ size:1.4G cached:1.4G
 ```
 
-##Help
+Help
+----
 
 ```shell
 Usage:./cachemaster [Option] [File] ...
